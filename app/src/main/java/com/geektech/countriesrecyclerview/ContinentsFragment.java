@@ -9,15 +9,18 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.geektech.countriesrecyclerview.databinding.FragmentContinentsBinding;
 
 import java.util.ArrayList;
 
 
-public class ContinentsFragment extends Fragment {
+public class ContinentsFragment extends Fragment implements OnItemClick{
+
     private FragmentContinentsBinding binding;
     private ArrayList<String> continentList = new ArrayList<>();
+    private ContinentsAdapter continentsAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -29,10 +32,10 @@ public class ContinentsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        
+
         loadData();
 
-        ContinentsAdapter continentsAdapter = new ContinentsAdapter(continentList);
+        continentsAdapter = new ContinentsAdapter(continentList, this);
         binding.rvContinents.setAdapter(continentsAdapter);
     }
 
@@ -42,5 +45,19 @@ public class ContinentsFragment extends Fragment {
         continentList.add("Europe");
         continentList.add("North America");
         continentList.add("South America");
+    }
+
+    @Override
+    public void onClick(int pos) {
+        Toast.makeText(requireContext(), "pos" + pos, Toast.LENGTH_SHORT).show();
+
+        Bundle bundle = new Bundle();
+        bundle.putInt("key", pos);
+
+        CountriesFragment countriesFragment = new CountriesFragment();
+        countriesFragment.setArguments(bundle);
+
+        requireActivity().getSupportFragmentManager().beginTransaction().
+                replace(R.id.continentsContainer, countriesFragment).commit();
     }
 }
