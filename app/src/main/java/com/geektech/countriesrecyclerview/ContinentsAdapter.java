@@ -1,5 +1,6 @@
 package com.geektech.countriesrecyclerview;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +15,11 @@ import java.util.ArrayList;
 public class ContinentsAdapter extends RecyclerView.Adapter<ContinentsAdapter.ContinentsViewHolder> {
 
     private ArrayList<String> continentList;
+    private OnItemClick onItemClick;
 
-    public ContinentsAdapter(ArrayList<String> continentList) {
+    public ContinentsAdapter(ArrayList<String> continentList, OnItemClick onItemClick) {
         this.continentList = continentList;
+        this.onItemClick = onItemClick;
     }
 
     @NonNull
@@ -27,8 +30,15 @@ public class ContinentsAdapter extends RecyclerView.Adapter<ContinentsAdapter.Co
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ContinentsViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ContinentsViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.bind(continentList.get(position));
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onItemClick.onClick(position);
+            }
+        });
     }
 
     @Override
@@ -49,5 +59,4 @@ public class ContinentsAdapter extends RecyclerView.Adapter<ContinentsAdapter.Co
             binding.tvContinentsName.setText(continent);
         }
     }
-
 }

@@ -14,5 +14,4 @@
         app:layout_constraintStart_toStartOf="parent"
         android:name="com.geektech.countriesrecyclerview.ContinentsFragment"
         />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,12 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ContinentsFragment">
+    tools:context=".CountriesFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_continents"
+        android:id="@+id/rv_countries"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/continents_item" />
+        tools:listitem="@layout/countries_item" />
 </LinearLayout>
